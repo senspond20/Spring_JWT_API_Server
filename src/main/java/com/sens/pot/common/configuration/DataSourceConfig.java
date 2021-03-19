@@ -53,7 +53,7 @@ public class DataSourceConfig {
         config.addDataSourceProperty("dataSource.prepStmtCacheSqlLimit", "2048");
         config.addDataSourceProperty("dataSource.useServerPrepStmts", "true");
 
-
+    
         return new HikariDataSource(config);
     }
 
