@@ -1,4 +1,4 @@
-package com.sens.pot.configuration;
+package com.sens.pot.common.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

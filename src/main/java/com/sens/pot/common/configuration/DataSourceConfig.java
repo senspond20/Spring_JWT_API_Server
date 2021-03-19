@@ -1,4 +1,4 @@
-package com.sens.pot.configuration;
+package com.sens.pot.common.configuration;
 import javax.sql.DataSource;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -15,35 +15,37 @@ public class DataSourceConfig {
     /**
      * Config
      */
-    private final boolean USELOG4JDBC = false;
-    private final boolean AUTOCOMMIT = false;
+    private final boolean IS_USE_LOG4JDBC = true;
+    private final boolean IS_AUTOCOMMIT = false;
 
     @Bean(name="dataSource")
     @Primary
     @ConfigurationProperties("spring.datasource")
     public DataSource dataSource(){
-
+        final String DB_USER = "senspi";
+        final String DB_PWD = "ad0c5c677b5e4baee346419c8d51d613a15015ddcb023307fd3ed95f006ed093";
+        final String DB_URL = "senspond.iptime.org:3309/PI_API_V1?useSsl=false&serverTimezone=UTC";
         /*
-            CREATE DATABASE springweb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci; 
-            create user 'senspond'@'%' identified by 'dlrjs0326';
-            grant all privileges on springweb.* to 'senspond'@'%';
-            flush PRIVILEGES;
+          CREATE DATABASE PI_API_V1 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci; 
+          create user 'senspi'@'%' identified by 'ad0c5c677b5e4baee346419c8d51d613a15015ddcb023307fd3ed95f006ed093';
+          grant all privileges on PI_API_V1.* to 'senspi'@'%';
+          flush PRIVILEGES;
+          SELECT SHA2('wldus961', 256);
         */
-
         HikariConfig config = new HikariConfig();
 
-        if(USELOG4JDBC){
+        if(IS_USE_LOG4JDBC){
             config.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-            config.setJdbcUrl("jdbc:log4jdbc:mysql://senspond.iptime.org:3309/springweb?useSsl=false&serverTimezone=UTC");    
+            config.setJdbcUrl("jdbc:log4jdbc:mysql://" + DB_URL);    
         }else{
             config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-            config.setJdbcUrl("jdbc:mysql://senspond.iptime.org:3309/springweb?useSsl=false&serverTimezone=UTC");
+            config.setJdbcUrl("jdbc:mysql://" + DB_URL);
         }
     
-        config.setUsername("senspond");
-        config.setPassword("dlrjs0326");
+        config.setUsername(DB_USER);
+        config.setPassword(DB_PWD);
 
-        config.setAutoCommit(AUTOCOMMIT); // autocommit 
+        config.setAutoCommit(IS_AUTOCOMMIT); // autocommit 
         //config.setConnectionInitSql("SELECT 1");
         config.setPoolName("springHikariCP");
         config.addDataSourceProperty("dataSource.cachePrepStmts", "true");
@@ -54,4 +56,7 @@ public class DataSourceConfig {
 
         return new HikariDataSource(config);
     }
+
+
+
 }
