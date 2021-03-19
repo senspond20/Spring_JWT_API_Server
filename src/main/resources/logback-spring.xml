@@ -2,10 +2,8 @@
 <configuration>
 
     <!-- logfile save path-->
-    <property name="LOG_PATH" value="/logs/spring_api_v1"/>
+    <property name="LOG_PATH" value="/home/pi/logs/spring_api_v1"/>
     <property name="LOG_FILENAME" value="log"/>
-   
-
     <property name="LOG_PATTERN" value="[%-5level] %d{yy-MM-dd HH:mm:ss}[%thread] [%logger{0}:%line] - %msg%n" />
     <property name="LOG_PATTERN_DEV" value="[%-5level] [%logger{0}:%line] - %msg%n" />
     <property name="LOG_PATTERN_ROLLING" value="[%-5level][%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread][%logger{0}:%line] - %msg%n" />
