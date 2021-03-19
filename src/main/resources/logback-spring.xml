@@ -3,7 +3,7 @@
 
     <!-- logfile save path-->
 
-    <property name="LOG_PATH" value="d:/logs/myapp"/> 
+    <property name="LOG_PATH" value="/logs/springapi"/> 
     <property name="LOG_FILENAME" value="logback"/>
 
     <property name="LOG_PATTERN" value="[%-5level] %d{yy-MM-dd HH:mm:ss}[%thread] [%logger{0}:%line] - %msg%n" />
