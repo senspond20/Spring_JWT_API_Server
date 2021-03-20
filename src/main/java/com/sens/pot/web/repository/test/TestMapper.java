@@ -3,6 +3,8 @@ package com.sens.pot.web.repository.test;
 import java.util.List;
 import java.util.Map;
 
+import com.sens.pot.web.domain.test.Test;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -10,5 +12,5 @@ import org.apache.ibatis.annotations.Select;
 public interface TestMapper {
 
     // @Select("SELECT * FROM TEST")
-    public List<Map<String,Object>> selectTestAll();
+    public List<Test> selectTestAll();
 }

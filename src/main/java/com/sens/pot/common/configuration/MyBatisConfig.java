@@ -1,6 +1,11 @@
 package com.sens.pot.common.configuration;
 
+import java.nio.file.Paths;
+
 import javax.sql.DataSource;
+
+import com.sens.pot.PotApplication;
+import com.sens.pot.common.utils.FilesCopyUtils;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -20,13 +25,14 @@ public class MyBatisConfig {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         Resource mybatisConfig = new PathMatchingResourcePatternResolver().getResource("classpath:mybatis-config.xml");
         Resource[] mapperLocations = new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/**/*.xml");
-
+		
 		sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setConfigLocation(mybatisConfig);
 		sqlSessionFactoryBean.setMapperLocations(mapperLocations);
 		return sqlSessionFactoryBean.getObject();
 	}
 
+	
 	@Bean
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
