@@ -27,13 +27,13 @@ public class InitSqlC {
     
     @Test
     void insert_Init_Sql(){
-        Resource initSchema = new ClassPathResource("sql/schema-v1.sql");
+        // Resource initSchema = new ClassPathResource("sql/schema-v1.sql");
         Resource initData = new ClassPathResource("sql/data-v1.sql");
         ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
 
-        if(IS_USE_INIT_SCHEMA)  databasePopulator.addScript(initSchema);
+        // if(IS_USE_INIT_SCHEMA)  databasePopulator.addScript(initSchema);
         if(IS_USE_INIT_DATA)    databasePopulator.addScript(initData);
-        
+        // databasePopulator.addScript(new ClassPathResource("sql/account.sql"));
         databasePopulator.setIgnoreFailedDrops(true);
         // databasePopulator.setSqlScriptEncoding("utf8");
         databasePopulator.execute(dataSource);

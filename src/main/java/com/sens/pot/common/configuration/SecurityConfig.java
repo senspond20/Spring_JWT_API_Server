@@ -1,12 +1,15 @@
 package com.sens.pot.common.configuration;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -33,8 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/api/**","/signup","/authenticate").permitAll() // 홈, 회원가입, 로그인 검증 url에 접근허용
-            .anyRequest().authenticated()                           // 을 제외한 모든 요청에 인증 요구
+            .antMatchers("/api/**").permitAll() // /api/** url에 모든 접근허용
+            .anyRequest().authenticated()       // 을 제외한 모든 요청에 인증 요구
             .and()
         .formLogin()
             .and()
@@ -47,4 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // super.configure(http);
     }
 
+    @Bean
+    public PasswordEncoder passwodEncoderBean() {
+        return new BCryptPasswordEncoder();
+    }
 }
