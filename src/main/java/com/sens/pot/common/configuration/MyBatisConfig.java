@@ -1,12 +1,6 @@
 package com.sens.pot.common.configuration;
 
-import java.nio.file.Paths;
-
 import javax.sql.DataSource;
-
-import com.sens.pot.PotApplication;
-import com.sens.pot.common.utils.FilesCopyUtils;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,7 +26,7 @@ public class MyBatisConfig {
 		return sqlSessionFactoryBean.getObject();
 	}
 
-	
+
 	@Bean
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
