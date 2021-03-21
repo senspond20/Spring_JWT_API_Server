@@ -1,7 +1,4 @@
 package com.sens.pot.common.utils;
-
-import java.io.File;
-import java.io.FilenameFilter;
 import java.nio.file.Paths;
 
 public class MapperXmlCopyToResources {

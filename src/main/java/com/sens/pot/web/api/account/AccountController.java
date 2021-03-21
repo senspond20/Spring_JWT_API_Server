@@ -1,4 +1,4 @@
-package com.sens.pot.web.api;
+package com.sens.pot.web.api.account;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +14,6 @@ import com.sens.pot.web.service.dto.AccountSaveRequestDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,9 +48,9 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findAccountByEmail(email));
     }
 
-    // @PostAuthorize("ADMIN") // 추후 관리자이상 권한에서만 조회 가능
+    @PostAuthorize("hasRole('USER')") 
     @GetMapping("/info")
-    public ResponseEntity<?> getAccountDetailInfo(Authentication auth, @RequestParam String email){
+    public ResponseEntity<?> getAccountDetailInfo(@RequestParam String email){
         return ResponseEntity.ok(UserDetailsService.loadUserByUsername(email));
     }
 

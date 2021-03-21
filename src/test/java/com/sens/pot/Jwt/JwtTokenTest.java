@@ -5,10 +5,7 @@ import java.util.Map;
 
 import com.google.common.base.Function;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
-import antlr.Token;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

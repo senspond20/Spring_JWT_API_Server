@@ -1,7 +1,6 @@
 package com.sens.pot.web.repository.test;
 
 import java.util.List;
-import java.util.Map;
 
 import com.sens.pot.web.domain.test.Test;
 

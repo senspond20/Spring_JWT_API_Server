@@ -1,15 +1,9 @@
 package com.sens.pot.web.service;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
+
 import java.util.Set;
-
-import javax.persistence.criteria.SetJoin;
-
-import com.sens.pot.web.domain.account.Account;
 import com.sens.pot.web.repository.account.AccountMapper;
-import com.sens.pot.web.repository.account.AccountRepository;
 import com.sens.pot.web.service.dto.AccountResponseDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +38,7 @@ public class CustomUserDetailService implements UserDetailsService{
     private Set<SimpleGrantedAuthority> getAuthority(AccountResponseDto dto) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         String[] roles = dto.getRoles().split(",");
+
         for(String role : roles){
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
         };

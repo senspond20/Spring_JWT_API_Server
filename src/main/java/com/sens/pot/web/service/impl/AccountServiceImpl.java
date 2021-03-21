@@ -2,7 +2,6 @@ package com.sens.pot.web.service.impl;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -83,7 +82,6 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public List<AccountResponseDto> getAccountAndRolesAll() {
-        // TODO Auto-generated method stub
         return accountMapper.select_AccountAndRoles_All();
     }
 
