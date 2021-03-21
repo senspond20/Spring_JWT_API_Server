@@ -9,10 +9,13 @@
         <setting name="defaultStatementTimeout" value="60"/>
         <setting name="callSettersOnNulls" value="true"/>
         <setting name="mapUnderscoreToCamelCase" value="false"/>
+        
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
     </settings>
 	<typeAliases>
         <!-- <typeAlias type="java.util.HashMap" alias="hashmap" /> -->
-		<!-- <typeAlias type="com.sens.pond.board.entity.Board" alias="Board" /> -->
+		<typeAlias type="com.sens.pot.web.service.dto.AccountResponseDto" alias="AccountResponseDto" />
         
     </typeAliases>
 </configuration>

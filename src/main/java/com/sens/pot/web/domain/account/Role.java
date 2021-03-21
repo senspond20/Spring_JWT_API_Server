@@ -25,12 +25,12 @@ public class Role {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "role_name")
+    @Column(name = "role_name", length = 60)
     private String name;
 
-    @Column
+    @Column(length = 155)
     private String description;
-
+    
     @Builder
     public Role(String name, String description){
         this.name = name;

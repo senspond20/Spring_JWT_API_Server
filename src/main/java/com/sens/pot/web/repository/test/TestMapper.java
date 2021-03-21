@@ -11,6 +11,6 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface TestMapper {
 
-    // @Select("SELECT * FROM TEST")
-    public List<Test> selectTestAll();
+    @Select("SELECT * FROM test")
+    public List<Test> select_TestAll();
 }

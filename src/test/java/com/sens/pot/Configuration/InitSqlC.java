@@ -20,18 +20,18 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 @SpringBootTest
 public class InitSqlC {
-    final boolean IS_USE_INIT_SCHEMA = true;
+    final boolean IS_USE_INIT_SCHEMA = false;
     final boolean IS_USE_INIT_DATA = true;
  
     @Autowired DataSource dataSource;
     
     @Test
     void insert_Init_Sql(){
-        // Resource initSchema = new ClassPathResource("sql/schema-v1.sql");
+        Resource initSchema = new ClassPathResource("sql/schema-v1.sql");
         Resource initData = new ClassPathResource("sql/data-v1.sql");
         ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
 
-        // if(IS_USE_INIT_SCHEMA)  databasePopulator.addScript(initSchema);
+        if(IS_USE_INIT_SCHEMA)  databasePopulator.addScript(initSchema);
         if(IS_USE_INIT_DATA)    databasePopulator.addScript(initData);
         // databasePopulator.addScript(new ClassPathResource("sql/account.sql"));
         databasePopulator.setIgnoreFailedDrops(true);

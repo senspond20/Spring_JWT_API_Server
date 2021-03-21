@@ -39,12 +39,7 @@ public class Account {
     @Column(length = 120, nullable = false)
     private String password;
 
-    // @ColumnDefault("'USER'")
-    // @Column(name ="ROLE", length = 15, nullable = false)
-
-    // private String authority;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "account_roles",
             joinColumns = {
             @JoinColumn(name = "account_id")
