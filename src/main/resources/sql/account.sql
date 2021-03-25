@@ -8,22 +8,23 @@ SET foreign_key_checks = 1;
 
 -- CREATE
 
--- 회원가입시 필수적으로 필요한 
-CREATE OR REPLACE TABLE `account` (
-  `account_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(155)NOT NULL,
+-- 절대 수정이 불가능한 정보 계정 테이블(회원가입시 email,password 만 요구)
+CREATE TABLE  `account` (
+  `account_id` BIGINT(20)    NOT NULL AUTO_INCREMENT,
+  `email`      VARCHAR(255)  NOT NULL,
+  `password`   VARCHAR(255)  NOT NULL,
+  `create_at`  TIMESTAMP     NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`account_id`),
   UNIQUE KEY (`email`)
 );
 
 -- 계속 추가
 CREATE OR REPLACE TABLE `account_detail` (
-  `account_id` bigint(20) NOT NULL,
+  `account_id` BIGINT(20)  NOT NULL,
   `user_name`  VARCHAR(80) COMMENT '유저이름',
-  `sex`        CHAR(1) COMMENT '성별', 
+  `sex`        CHAR(1)     COMMENT '성별', 
   `creat_at`   TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '가입시간', 
-  `update_at`  TIMESTAMP NULL DEFAULT current_timestamp on update current_timestamp COMMENT '정보수정시간',
+  `update_at`  TIMESTAMP,
   PRIMARY KEY (`account_id`),
   CONSTRAINT FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`)
 );
@@ -35,13 +36,13 @@ CREATE OR REPLACE TABLE `role` (
   PRIMARY KEY (`role_id`)
 );
 
-CREATE TABLE `account_roles` (
+CREATE OR REPLACE TABLE `account_roles` (
   `account_id` bigint(20) NOT NULL,
   `role_id` int(11) NOT NULL,
   PRIMARY KEY (`account_id`,`role_id`),
   KEY (`role_id`),
-  CONSTRAINT FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
-  CONSTRAINT FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`)
+  CONSTRAINT FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE,
+  CONSTRAINT FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE
 );
 
 
@@ -61,7 +62,7 @@ INSERT INTO `account_roles`(account_id, role_id) VALUES(1,1),(1,2),(1,3),(2,2);
 INSERT INTO `account_detail` (account_id, user_name,sex) VALUES(1,'아저씨','남');
 INSERT INTO `account_detail` (account_id, user_name,sex) VALUES(2,'아줌마','여');
 
-SELECT * FROM account_detail;
+/* SELECT * FROM account_detail;
 UPDATE `account_detail` SET user_name ='배짱이' WHERE account_id = 1;
 
 
@@ -80,4 +81,4 @@ JOIN `role` r USING(role_id);
 
 
 SELECT account_id FROM account WHERE email ='senspond';
-SELECT role_id FROM `role` WHERE role_name ='ADMIN';
+SELECT role_id FROM `role` WHERE role_name ='ADMIN'; */

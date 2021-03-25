@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class TestController {
+public class InitController {
     
     private final TestMapper testMapper;
 
@@ -32,4 +32,5 @@ public class TestController {
         map.put("time", LocalDate.now());
         return map;
     }
+    
 }
