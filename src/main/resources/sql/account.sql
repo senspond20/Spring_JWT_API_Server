@@ -10,13 +10,13 @@ SET foreign_key_checks = 1;
 
 -- 절대 수정이 불가능한 정보 계정 테이블(회원가입시 email,password 만 요구)
 CREATE TABLE  `account` (
-  `account_id` BIGINT(20)    NOT NULL AUTO_INCREMENT,
-  `email`      VARCHAR(255)  NOT NULL,
-  `password`   VARCHAR(255)  NOT NULL,
+  `account_id` BIGINT(20)    NOT NULL AUTO_INCREMENT COMMENT '계정 고유키(pk)',
+  `email`      VARCHAR(255)  NOT NULL COMMENT '이메일(UK)',
+  `password`   VARCHAR(255)  NOT NULL COMMENT '비밀번호',
   `create_at`  TIMESTAMP     NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`account_id`),
   UNIQUE KEY (`email`)
-);
+) COMMENT '사용자 계정';
 
 -- 계속 추가
 CREATE OR REPLACE TABLE `account_detail` (
@@ -38,10 +38,10 @@ CREATE OR REPLACE TABLE `role` (
 
 CREATE OR REPLACE TABLE `account_roles` (
   `account_id` bigint(20) NOT NULL,
-  `role_id` int(11) NOT NULL,
+  `role_id`    int(11)    NOT NULL,
   PRIMARY KEY (`account_id`,`role_id`),
   KEY (`role_id`),
-  CONSTRAINT FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE,
+  CONSTRAINT FOREIGN KEY (`role_id`)    REFERENCES `role` (`role_id`) ON DELETE CASCADE,
   CONSTRAINT FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE
 );
 

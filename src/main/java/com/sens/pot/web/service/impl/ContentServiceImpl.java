@@ -1,8 +1,5 @@
 package com.sens.pot.web.service.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.sens.pot.web.domain.content.Category;
 import com.sens.pot.web.repository.content.CategoryRepository;
 import com.sens.pot.web.service.ContentService;

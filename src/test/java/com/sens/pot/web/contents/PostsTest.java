@@ -12,6 +12,7 @@ import com.sens.pot.web.repository.content.PostsRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 public class PostsTest {
@@ -35,6 +36,7 @@ public class PostsTest {
     }
 
     @Test
+    @Transactional 
     void test2(){
 
         Optional<Posts> post = postsRepository.findById(1L);

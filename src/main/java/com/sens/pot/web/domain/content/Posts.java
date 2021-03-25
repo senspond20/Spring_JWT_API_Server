@@ -50,7 +50,7 @@ public class Posts {
     // @UpdateTimestamp
     // private Date updateAt;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "code")
     private Category category;
 }
