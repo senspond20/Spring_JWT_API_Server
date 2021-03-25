@@ -16,12 +16,14 @@ import org.springframework.context.annotation.PropertySource;
     CREATE DATABASE PI_API_V1 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci; 
     create user 'senspi'@'%' identified by 'ad0c5c677b5e4baee346419c8d51d613a15015ddcb023307fd3ed95f006ed093';
     grant all privileges on PI_API_V1.* to 'senspi'@'%';
+    grant all privileges on jpatest.* to 'senspi'@'%';
     flush PRIVILEGES;
     SELECT SHA2('wldus961', 256);
 */
 
 @Configuration
-@PropertySource("classpath:database.properties")
+// @PropertySource("classpath:database.properties")   // 운영디비(jpa create,update 금지)
+@PropertySource("classpath:database-dev.properties")  // 개발디비(jpa create,update Test DB)
 public class DataSourceConfig {
     
     @Value("${datasource.driverClassName}")

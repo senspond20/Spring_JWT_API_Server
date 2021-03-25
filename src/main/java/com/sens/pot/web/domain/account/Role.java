@@ -25,7 +25,7 @@ public class Role {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "role_name", length = 60)
+    @Column(name = "role_name", length = 60, unique = true)
     private String name;
 
     @Column(length = 155)
@@ -36,4 +36,5 @@ public class Role {
         this.name = name;
         this.description =description;
     }
+    
 }
