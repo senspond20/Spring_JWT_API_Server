@@ -55,12 +55,12 @@ public class DataSourceConfig {
         HikariConfig config = new HikariConfig();
         config.setDataSource(basicDataSource());
         // config.setAutoCommit(false);
-
         config.setPoolName("springHikariCP");
         config.setMaximumPoolSize(10);
         config.setMaximumPoolSize(30);
         config.setConnectionTimeout(1000);
-        config.setConnectionInitSql("SELECT 1");
+        // config.setConnectionInitSql("SELECT 1");
+        config.getConnectionTestQuery();
 
         // config.setLeakDetectionThreshold(2000);
         
