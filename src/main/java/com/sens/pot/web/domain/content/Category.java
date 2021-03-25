@@ -2,11 +2,13 @@ package com.sens.pot.web.domain.content;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -43,6 +45,9 @@ public class Category {
     @Column(name="update_at")
     @UpdateTimestamp
     private Date updateAt;
+
+    // @OneToMany(mappedBy = "category")
+    // private List<Posts> posts;
 
     @Builder
     public Category(String code, String name, String description){

@@ -21,17 +21,10 @@ public class ContentServiceImpl implements ContentService{
     @Override
     @Transactional
     public Category saveCategory(String name, String description){
-        // prefix : 2자리
-        final String prefix= "CT";  
-        // 오늘날짜 초-밀리세컨드초 : 4자리 
-        SimpleDateFormat sf = new SimpleDateFormat("sSSS");
-        String sssTime = sf.format(new Date()).toString();
-        sf = null;
-        // 0~65 난수 : 1자리 문자
-        char numChar = (char) Math.round(Math.random() * 66);
-        // 2 + 4 + 1 = 7자리 문자열
-        String code = (prefix + sssTime + numChar).substring(0, 7);
-        return saveCategory(code, name, description);
+        return categoryRepository.save(Category.builder()
+                                               .name(name)
+                                               .description(description)
+                                               .build());
     }
     @Override
     @Transactional

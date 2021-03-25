@@ -29,7 +29,7 @@ public class CategoryTest {
     @Test
 //    @Transactional
     void test232(){
-        categoryRepository.save(Category.builder().name("백엔드").description("백엔드 정리").build());
+        // categoryRepository.save(Category.builder().name("백엔드").description("백엔드 정리").build());
         System.out.println("=======================================");
 
         Category category = categoryRepository.findByCode("CT56453");
@@ -37,9 +37,9 @@ public class CategoryTest {
         // category.setName("HTML");
         // category.setDescription("HTML에 대한 설명입니다");
 
-        contentService.updateCategory("CT56453", "HTML", "HTML에 대한 설명입니다");
+        // contentService.updateCategory("CT56453", "HTML", "HTML에 대한 설명입니다");
 
-        category = categoryRepository.findByCode("CT56453");
+        // category = categoryRepository.findByCode("CT56453");
 
     }
     @Test
