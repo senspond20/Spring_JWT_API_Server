@@ -17,8 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class ContentServiceImpl implements ContentService{
     
     private final CategoryRepository categoryRepository;
-
-    
+ 
     @Override
     @Transactional
     public Category saveCategory(String name, String description){
@@ -43,7 +42,7 @@ public class ContentServiceImpl implements ContentService{
                                                .description(description)
                                                .build());
     }
-    
+
     @Override
     @Transactional
     public Category updateCategory(String code, String name, String description){

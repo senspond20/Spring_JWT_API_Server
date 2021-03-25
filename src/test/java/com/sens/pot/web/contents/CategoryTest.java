@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Optional;
 
 import com.sens.pot.web.domain.content.Category;
 import com.sens.pot.web.repository.content.CategoryRepository;
@@ -33,15 +32,14 @@ public class CategoryTest {
         categoryRepository.save(Category.builder().name("백엔드").description("백엔드 정리").build());
         System.out.println("=======================================");
 
-        Optional<Category> category = categoryRepository.findById("CT56453");
+        Category category = categoryRepository.findByCode("CT56453");
         System.out.println(category);
         // category.setName("HTML");
         // category.setDescription("HTML에 대한 설명입니다");
 
-        // contentService.updateCategory("CT56453", "HTML", "HTML에 대한 설명입니다");
+        contentService.updateCategory("CT56453", "HTML", "HTML에 대한 설명입니다");
 
-        // category = categoryRepository.findByCode("CT56453");
-        // System.out.println(category);
+        category = categoryRepository.findByCode("CT56453");
 
     }
     @Test
