@@ -56,7 +56,6 @@ public class Account {
         this.roles = roles;
     }
 
-
     public void updateRoles(Set<Role> roleSet) {
         this.roles = roleSet;
     }
