@@ -60,8 +60,9 @@ public class DataSourceConfig {
         config.setMaximumPoolSize(10);
         config.setMaximumPoolSize(30);
         config.setConnectionTimeout(1000);
+        config.setConnectionInitSql("SELECT 1");
+
         // config.setLeakDetectionThreshold(2000);
-        // config.setConnectionInitSql("SELECT 1");
         
         return new HikariDataSource(config);
     }

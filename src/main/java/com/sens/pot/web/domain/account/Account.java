@@ -75,6 +75,7 @@ public class Account {
         this.password = password;
         this.roles = roles;
     }
+
     public void updateRoles(Set<Role> roleSet) {
         this.roles = roleSet;
     }
