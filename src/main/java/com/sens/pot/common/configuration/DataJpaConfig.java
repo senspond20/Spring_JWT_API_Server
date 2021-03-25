@@ -1,8 +1,4 @@
-package com.sens.pot.common.configuration;
-
-public class DataJpaConfig {
-   // package com.sensweb.demo.config;
-
+// package com.sens.pot.common.configuration;
 // import java.util.Properties;
 
 // import javax.persistence.EntityManager;
@@ -19,10 +15,11 @@ public class DataJpaConfig {
 // import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 // @Configuration
-// @EnableJpaRepositories("com.sensweb.demo")
+// @EnableJpaRepositories("com.sens.pot.web.repository")
 // @EnableTransactionManagement
-// public class SpringDataJpaConfig {
-    
+// public class DataJpaConfig {
+
+
 //     @Autowired
 //     private DataSource dataSource;
  
@@ -38,6 +35,7 @@ public class DataJpaConfig {
 //     }
 
 //     @Bean
+    
 //     public EntityManagerFactory entityManagerFactory() {
 //         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 //         hibernateJpaVendorAdapter.setGenerateDdl(true); //  spring.jpa.generate-ddl=true
@@ -64,9 +62,8 @@ public class DataJpaConfig {
 //         properties.put("hibernate.dialect", "org.hibernate.dialect.MariaDB103Dialect");
 //         // properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 
-//         properties.put("hibernate.hbm2ddl.auto", "create"); // spring.jpa.hibernate.ddl-auto=create-drop
+//         properties.put("hibernate.hbm2ddl.auto", "update"); // spring.jpa.hibernate.ddl-auto=create-drop
 //         return properties;
 //     }
 
 // } 
-}

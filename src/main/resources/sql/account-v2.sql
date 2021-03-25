@@ -19,11 +19,11 @@ INSERT INTO `account_status` (`account_id`) VALUES(@aid);
 INSERT INTO `account_detail` (`account_id`) VALUES(@aid);
 
 -- CREATE
--- 절대 수정이 불가능한 정보 계정 테이블(회원가입시 email,password 만 요구)
+-- 회원 가입시 필요한 계정 정보 테이블(회원가입시 email,password 만 요구)
 CREATE OR REPLACE TABLE  `account` (
-  `account_id` INT(11)       AUTO_INCREMENT COMMENT '계정 고유키(PK)',
-  `email`      VARCHAR(255)  NOT NULL             COMMENT '이메일(UK)',
-  `password`   VARCHAR(255)  NOT NULL             COMMENT '비밀번호',
+  `account_id` INT(11)       AUTO_INCREMENT  COMMENT '계정 고유키(PK)',
+  `email`      VARCHAR(255)  NOT NULL        COMMENT '이메일(UK)',
+  `password`   VARCHAR(255)  NOT NULL        COMMENT '비밀번호',
   PRIMARY KEY (`account_id`),
   UNIQUE KEY (`email`)
 ) COMMENT '사용자 계정(로그인 검증)';

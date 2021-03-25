@@ -19,6 +19,8 @@ import com.sens.pot.common.anotation.ColumnComment;
 // import com.sens.pot.common.anotation.TableComment;
 
 import javax.persistence.JoinColumn;
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 
 import lombok.Builder;
@@ -45,6 +47,9 @@ public class Account {
     @Column(unique = true, nullable = false)
     private String email;
 
+    // @Column(name = "username")
+    // private String username;
+
     @Column(length = 255, nullable = false)
     @ColumnComment("'패스워드'")
     private String password;
@@ -58,20 +63,18 @@ public class Account {
             @JoinColumn(name = "role_id") })
     private Set<Role> roles;
 
-    // @OneToOne
-    // @JoinColumn(name = "account_detail_id")
-    // private AccountDetail accountDetail;
 
-    // @Column(name="status", columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1 COMMENT '계정 활성(1)/비활성(0)'")
-    // private Boolean isActivation;
+    // @Column(name = "is_active", columnDefinition = "TINYINT(1)")
+    // private Boolean iaActive;
 
-    // @Column(name ="create_at", 
-    // columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '가입날짜(UTC)'")
+    // @Column(name ="create_at")
+    // @CreationTimestamp 
     // private Date createAt;
     
     @Builder
     public Account(String email, String password, Set<Role> roles) {
         this.email = email;
+        // this.iaActive = true;
         this.password = password;
         this.roles = roles;
     }
@@ -79,4 +82,14 @@ public class Account {
     public void updateRoles(Set<Role> roleSet) {
         this.roles = roleSet;
     }
+
+
+        // @OneToOne
+    // @JoinColumn(name = "account_detail_id")
+    // private AccountDetail accountDetail;
+
+    // @Column(name="status", columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1 COMMENT '계정 활성(1)/비활성(0)'")
+    // private Boolean isActivation;
+
+    // columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '가입날짜(UTC)'")
 }

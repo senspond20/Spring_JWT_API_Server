@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+
 public class CategoryTest {
     
     private final String prefix = "CT"; // 카테고리 업무코드

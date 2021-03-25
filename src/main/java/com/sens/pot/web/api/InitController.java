@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.sens.pot.web.domain.test.Test;
+import com.sens.pot.web.repository.content.ContentMapper;
+import com.sens.pot.web.repository.content.PostsMapper;
 import com.sens.pot.web.repository.test.TestMapper;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +23,18 @@ public class InitController {
     
     private final TestMapper testMapper;
 
+    private final ContentMapper contentMapper;
     @GetMapping("/mybatisTest")
     public List<Test> test(){
+        System.out.println(testMapper.select_TestAll());
         return testMapper.select_TestAll();
     }
+
+    @GetMapping("/posts")
+    public Object getPost(){
+        return contentMapper.select_PostsList();
+    }
+
     @GetMapping("/hello")
     public Map<String,Object> hello(){
         Map<String,Object> map = new HashMap<>();
