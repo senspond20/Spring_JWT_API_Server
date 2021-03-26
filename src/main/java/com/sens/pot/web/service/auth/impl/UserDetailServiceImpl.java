@@ -35,7 +35,6 @@ public class UserDetailServiceImpl implements UserDetailsService{
     private Set<SimpleGrantedAuthority> getAuthority(AccountResponseDto dto) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         String[] roles = dto.getRoles().split(",");
-
         for(String role : roles){
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
         };

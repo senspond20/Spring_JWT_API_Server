@@ -54,7 +54,7 @@ public class Account {
     @ColumnComment("'패스워드'")
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "account_roles",
             joinColumns = {
             @JoinColumn(name = "account_id")

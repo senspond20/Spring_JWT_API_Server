@@ -30,7 +30,7 @@ import lombok.ToString;
 @Table(name="posts")
 @Getter
 @EqualsAndHashCode(of= "id")
-@ToString
+@ToString(exclude = "reply")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Posts {
@@ -57,9 +57,13 @@ public class Posts {
     @JoinColumn(name = "code")
     private Category category; // 카테고리
 
-    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "post_id")
+    @OneToMany(fetch = FetchType.LAZY, 
+               cascade = {
+                    CascadeType.PERSIST, 
+                    CascadeType.REMOVE
+              }, mappedBy = "posts")
     // @JoinColumn(name = "post_id")
-    // private List<Reply> reply = new ArrayList<>();
+    private List<Reply> reply = new ArrayList<>();
 
     @Column(name="liked", columnDefinition = "INT(11)")
     private int liked = 0; // 좋아요 
@@ -77,6 +81,10 @@ public class Posts {
         this.category = category;
         this.liked = 0;
     }
+    // 코멘트 추가
+    public void addReply(String reply){
+        this.reply.add(new Reply(this, reply));
+    }
 
     // Update
     public void updateTitle(String title){
@@ -91,5 +99,6 @@ public class Posts {
     public void updateLiked(){
         this.liked++;
     }
+
 
 }

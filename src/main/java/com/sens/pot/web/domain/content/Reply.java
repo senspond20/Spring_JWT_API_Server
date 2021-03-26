@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +28,7 @@ import lombok.ToString;
 @Table(name="reply")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "posts")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reply {
@@ -40,8 +43,10 @@ public class Reply {
     // 전통적인 테이블 설계 원칙은 자식에 외래키를 주지만
     // 객체지향론적으로 표현할때는 자들은 Posts에 외래키를 둔다. (실제로는 자식에 외래키가 생성)
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    // @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "post_id")
+    @JsonIgnore
     private Posts posts;
 
     @Column(name="reply", length = 500) // 500자 제한
@@ -51,7 +56,7 @@ public class Reply {
     @CreationTimestamp
     private Date create_at;
 
-    // 게시물에 대한 답변 작성
+    // 게시물에 대한 답변 작성    
     public Reply(Posts posts, String reply){
         this.posts = posts;
         this.reply = reply;
