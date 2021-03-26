@@ -68,7 +68,6 @@ public class Posts {
     @Column(name="liked", columnDefinition = "INT(11)")
     private int liked = 0; // 좋아요 
 
-
     //private Tags tags; // 태그
     // 카테고리 지정안할수 있다.
     @Builder
