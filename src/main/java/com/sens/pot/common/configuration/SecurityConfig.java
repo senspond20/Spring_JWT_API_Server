@@ -3,7 +3,6 @@ package com.sens.pot.common.configuration;
 
 import com.sens.pot.common.jwt.JwtAuthenticationEntryPoint;
 import com.sens.pot.common.jwt.JwtAuthenticationFilter;
-import com.sens.pot.web.service.CustomUserDetailService;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -37,10 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-    @Bean
-    public CustomUserDetailService userDetailServiceBean() {
-        return new CustomUserDetailService();
     }
     @Bean
     public PasswordEncoder passwodEncoderBean() {
@@ -86,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()         
         .csrf().disable()
         .authorizeRequests() 
-            .antMatchers("/api/**","/authenticate").permitAll() // 홈, 회원가입, 로그인 검증 url에 접근허용
+            .antMatchers("/","/login/**","/api/**","/authenticate").permitAll() // 홈, 회원가입, 로그인 검증 url에 접근허용
             .anyRequest().authenticated()                           // 을 제외한 모든 요청에 인증 요구
         .and()
         .addFilterBefore(jwtAuthenticationFilterBean(), UsernamePasswordAuthenticationFilter.class) // 필터에서 거름

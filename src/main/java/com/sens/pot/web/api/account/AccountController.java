@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import com.sens.pot.web.domain.account.Account;
 import com.sens.pot.web.service.AccountService;
-import com.sens.pot.web.service.CustomUserDetailService;
+import com.sens.pot.web.service.auth.impl.UserDetailServiceImpl;
 import com.sens.pot.web.service.dto.AccountResponseDto;
 import com.sens.pot.web.service.dto.AccountSaveRequestDto;
 
@@ -29,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
-    private final CustomUserDetailService UserDetailsService;
+    private final UserDetailServiceImpl UserDetailsService;
       
     @PostMapping("/signup")
     public ResponseEntity<?> insertAccount(@RequestBody AccountSaveRequestDto accountSaveRequestDto){

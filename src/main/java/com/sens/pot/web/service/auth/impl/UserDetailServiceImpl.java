@@ -1,4 +1,4 @@
-package com.sens.pot.web.service;
+package com.sens.pot.web.service.auth.impl;
 
 import java.util.HashSet;
 
@@ -12,9 +12,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-
-public class CustomUserDetailService implements UserDetailsService{
+@Service
+public class UserDetailServiceImpl implements UserDetailsService{
 
     @Autowired
     // private AccountRepository accountRepository; 

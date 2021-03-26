@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="google-signin-scope" content="profile email"></meta>
+    <meta name ="google-signin-client_id" content="304210542468-tg4qh5fqdb0fbbkp51tl96ap21mspaaq.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function onSignIn(googleUser) {
+            
+        var profile = googleUser.getBasicProfile();
+        console.log('dfdfdddfdfd')
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        // window.location.replace(`https://accounts.google.com/o/oauth2/v2/auth?
+        // client_id=304210542468-tg4qh5fqdb0fbbkp51tl96ap21mspaaq.apps.googleusercontent.com
+        // &redirect_uri=http://localhost:8083/login/google/auth
+        // &response_type=code
+        // &scope=email%20profile%20openid
+        // &access_type=offline`)
+
+        }
+        function signOut(){
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function(){
+                console.log('User signed Out');
+            });
+            auth2.disconnect();
+        }
+</script>
+</head>
+<body>
+    <div class="g-signin2" data-onsucess="onSignIn"></div>
+    <div id ="test">fdfdf</div>
+    <button onclick="signOut();">Sign Out</button>
+</body>
+</html>

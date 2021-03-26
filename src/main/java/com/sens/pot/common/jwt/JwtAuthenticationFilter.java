@@ -19,7 +19,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sens.pot.web.service.CustomUserDetailService;
+// import com.sens.pot.web.service.CustomUserDetailService;
+import com.sens.pot.web.service.auth.impl.UserDetailServiceImpl;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -41,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      private JwtTokenProvider jwtUtils;
 
      @Autowired
-     private CustomUserDetailService userDetailService;
+     private UserDetailServiceImpl userDetailService;
 
 
      @Override
