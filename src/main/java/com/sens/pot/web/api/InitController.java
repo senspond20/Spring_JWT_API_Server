@@ -30,6 +30,8 @@ public class InitController {
         return testMapper.select_TestAll();
     }
 
+    
+
     @GetMapping("/posts")
     public Object getPost(){
         return contentMapper.select_PostsList();

@@ -30,12 +30,8 @@ public class UserDetailServiceImpl implements UserDetailsService{
         }else{
             return new User(dto.getEmail(), dto.getPassword(), getAuthority(dto));
         }
-        /*if(account == null){
-            throw new UsernameNotFoundException(email);
-        }else{
-            return new User(account.getEmail(), account.getPassword(), getAuthority(account));
-        }*/
     }
+    
     private Set<SimpleGrantedAuthority> getAuthority(AccountResponseDto dto) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         String[] roles = dto.getRoles().split(",");
