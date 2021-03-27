@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 // import com.sens.pot.web.service.CustomUserDetailService;
-import com.sens.pot.web.service.auth.impl.UserDetailServiceImpl;
+import com.sens.pot.web.service.auth.impl.CustomUserDetailService;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -42,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      private JwtTokenProvider jwtUtils;
 
      @Autowired
-     private UserDetailServiceImpl userDetailService;
+     private CustomUserDetailService userDetailService;
 
 
      @Override

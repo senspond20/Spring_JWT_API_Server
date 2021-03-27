@@ -1,9 +1,10 @@
 package com.sens.pot.web.service.auth.dto;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 public class GoogleOAuthRequest {
 	private String redirectUri;
@@ -18,4 +19,17 @@ public class GoogleOAuthRequest {
 	private String includeGrantedScopes;
 	private String loginHint;
 	private String prompt;
+
+
+	public String getRequestLoginUrl(String baseUrl){
+		return UriComponentsBuilder.fromHttpUrl(baseUrl)
+								   .queryParam("scope", this.scope)
+								   .queryParam("state", this.state)
+								   .queryParam("response_type", this.responseType)
+								   .queryParam("client_id", this.clientId)
+								   .queryParam("redirect_uri", this.redirectUri)
+								   .encode()
+								   .toUriString();
+	}
+
 }

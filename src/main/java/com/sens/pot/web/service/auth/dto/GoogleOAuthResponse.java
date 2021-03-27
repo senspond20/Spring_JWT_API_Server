@@ -1,15 +1,14 @@
 package com.sens.pot.web.service.auth.dto;
-import lombok.Data;
 
+import lombok.Getter;
+import lombok.ToString;
 
-@Data
-public class GoogleOAuthResponse {
-	
-	private String accessToken;
-	private String expiresIn;
-	private String refreshToken;
+/**
+ * 구글 응답
+ */
+@Getter
+@ToString
+public class GoogleOAuthResponse extends OAuthResponse{
+	private String id_token;
 	private String scope;
-	private String tokenType;
-	private String idToken;
-	
 }

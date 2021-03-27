@@ -81,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()         
         .csrf().disable()
         .authorizeRequests() 
-            .antMatchers("/","/login/**","/api/**","/authenticate").permitAll() // 홈, 회원가입, 로그인 검증 url에 접근허용
+            .antMatchers("/auth/**","/","/login/**","/api/**","/authenticate").permitAll() // 홈, 회원가입, 로그인 검증 url에 접근허용
             .anyRequest().authenticated()                           // 을 제외한 모든 요청에 인증 요구
         .and()
         .addFilterBefore(jwtAuthenticationFilterBean(), UsernamePasswordAuthenticationFilter.class) // 필터에서 거름

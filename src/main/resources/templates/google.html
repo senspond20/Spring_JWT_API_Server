@@ -5,10 +5,13 @@
 <title>HELLO OAUTH</title>
 </head>
 <body>
-	<h1>Google Login 완료</h1>
-<div th:text="'TOKEN : ' + ${token}"></div>
-<div th:text="'Email : ' + ${email}"></div>
-<div><img th:src="${picture}"></img></div>
+	<h1>Google Login !~</h1>
+<!-- <div th:text="'AccessToken' + ${accessToken}"></div> 
+<div th:text ="'UserInfo : ' + ${userInfo}"></div> -->
+<hr />
+<div th:text="'Email : ' + ${userInfo.email}"></div>
+<div th:text="'Name : ' + ${userInfo.name}"></div>
+<div><img th:src="${userInfo.picture}"></img></div>
 
 
 
