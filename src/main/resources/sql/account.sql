@@ -45,7 +45,6 @@ CREATE OR REPLACE TABLE `account_roles` (
   CONSTRAINT FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE
 );
 
-
 INSERT INTO `role` (role_name,description) VALUES 
                             ('ADMIN','관리자 권한입니다'),
                             ('USER','일반 사용자 권한입니다'),

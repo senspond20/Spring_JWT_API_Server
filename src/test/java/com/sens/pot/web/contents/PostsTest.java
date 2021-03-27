@@ -99,23 +99,23 @@ public class PostsTest {
     void reply_insertTest(){
 
         // category save
-        Category category = categoryRepository.save(Category.builder().name("백엔드").description("백엔드 정리").build());
+        Category category = categoryRepository.save(Category.builder().name("프론트 엔드").description("프론트엔드 정리").build());
         System.out.println(category);
-        
+       
         // Post
         Posts post = Posts.builder()
-                          .title("안녕하세요")
-                          .content("반갑습니다")
+                          .title("안녕하세요 프론트")
+                          .content("반갑습니다!!@#@")
                           .category(category)
                           .build();
-
+                      
         System.out.println(post);
         post = postsRepository.save(post);
 
         // Iterable<Reply> it = 
-        replyRepository.save(new Reply(post,"답변"));
+        replyRepository.save(new Reply(post,"프론트엔드 알려주세요"));
         replyRepository.save(new Reply(post,"우왕굳"));
-        replyRepository.save(new Reply(post,"답변이당"));
+
 
         // List<Posts> list = postsRepository.findAll();
 
@@ -125,24 +125,27 @@ public class PostsTest {
         // });        
     }
 
+    // FetchType.LAZY 가 적용되는지 확인
     @Test
-    @Transactional
+    @Transactional 
     // @Rollback(false)
     void seletPost_ReplyOne_Test(){
-        // 30 번 게시글 조회
-        Optional<Posts> post = postsRepository.findById(36L); //Optional null일수도 있는 wrapper 클래스 객체
+        // 1번
+        Optional<Posts> post = postsRepository.findById(1L); //Optional null일수도 있는 wrapper 클래스 객체
        
-        // post가 있으면 해당 게시글에 담긴 댓글리스트 가져온다
+        // post가 있으면 해당 게시글에 담긴 댓글리스트 가져온다. 1번 게시글에 있는 답변들 조회
         if( post.isPresent()){
              post.get().getReply()
                        .stream()
                        .forEach(System.out::println);
         }
-      
+    }   
+
+
         // post.get().addReply(new Reply("답변을 답니다"));
         
         // postsRepository.deleteById(14L);
-    }
+  
 
     /**
      * 자식에서 답변달기 Test
@@ -151,7 +154,7 @@ public class PostsTest {
     @Transactional
     @Rollback(false)
     void addReplyFromPosts_Test1(){
-        Optional<Posts> post = postsRepository.findById(36L);
+        Optional<Posts> post = postsRepository.findById(1L);
         // Test1
         if(post.isPresent())
           replyRepository.save(new Reply(post.get(),"답변입니다다다"));
@@ -167,11 +170,10 @@ public class PostsTest {
     @Transactional
     @Rollback(false)
     void addReplyFromPosts_Test2(){
-        Optional<Posts> post = postsRepository.findById(21L);
-
+        Optional<Posts> post = postsRepository.findById(1L);
        // Test2
         if(post.isPresent())   
-            post.get().addReply("신우쌤은 20살입니다");
+            post.get().addReply("안녕하십니까?");
         else
             System.out.println("해당글 없다");
         
@@ -189,12 +191,13 @@ public class PostsTest {
 
     /**
      * 게시글 삭제 -> 게시글에 연결된 댓글리스트도 다 삭제되는지 체크
+     * (CascadeType.REMOVE)
      */
     @Test
     // @Transactional
     void delete_Post_Test(){
         // Posts post = postsRepository.findById(30L);
-        postsRepository.deleteById(36L);
+        postsRepository.deleteById(1L);
     }
 
     /**
@@ -203,5 +206,16 @@ public class PostsTest {
     @Test
     void delete_reply_Test(){
         replyRepository.deleteById(41L);
+    }
+
+
+     /**
+     * 카테고리 삭제 > 카테고리에 딸린 포스트 > 포스트에 딸린 댓글 까지 삭제 되는지 테스트
+     */
+    @Test
+    @Transactional
+    @Rollback(false)
+    void delete_category_Test(){
+        categoryRepository.deleteByCode("CT24658");
     }
 }

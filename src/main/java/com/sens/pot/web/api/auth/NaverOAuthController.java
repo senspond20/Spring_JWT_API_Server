@@ -45,16 +45,19 @@ public class NaverOAuthController {
                                          @RequestParam(value = "state") String state){
         
 		  ResponseEntity<?> responseEntity = oAuthService.requestAccessToken(authCode, state);
-      if(responseEntity.getStatusCode() == HttpStatus.OK){
-        NaverOAuthResponse response = new ObjectMapper().convertValue(
-                                          responseEntity.getBody(), 
-                                          NaverOAuthResponse.class);
-         // DB에 response 에 저장
 
+      Object responseMessage = responseEntity.getBody();
+
+      if(responseEntity.getStatusCode() == HttpStatus.OK){
+        // 자바 객체로 변환
+        NaverOAuthResponse response = new ObjectMapper().convertValue(
+                                          responseMessage, 
+                                          NaverOAuthResponse.class);
+         // 레파지토리에 response 를 저장
           return response;
       }else{
         // 에러 
-          return responseEntity.getBody();
+          return responseMessage;
       }
     }
 

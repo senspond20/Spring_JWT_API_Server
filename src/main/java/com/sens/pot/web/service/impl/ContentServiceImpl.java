@@ -37,8 +37,8 @@ public class ContentServiceImpl implements ContentService{
     @Transactional
     public Category updateCategory(String code, String name, String description){
         Category category = categoryRepository.findByCode(code);
-        category.setName(name);
-        category.setDescription(description);
+        category.updatetName(name);
+        category.updateDescription(description);
         return category;
     }
 

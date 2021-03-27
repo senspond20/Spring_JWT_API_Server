@@ -12,7 +12,10 @@ import com.sens.pot.web.service.ContentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import io.jsonwebtoken.lang.Assert;
 
 @SpringBootTest
 
@@ -28,20 +31,25 @@ public class CategoryTest {
     private ContentService contentService;
 
     @Test
-//    @Transactional
-    void test232(){
-        // categoryRepository.save(Category.builder().name("백엔드").description("백엔드 정리").build());
+    @Transactional   // 트랜잭션
+    @Rollback(false) // 테스트 롤백하지 않고 디비에 저장
+    void CodeGenerator_Test(){
+        Category category = categoryRepository.save(Category.builder().name("프론트 엔드").description("프론트 엔드 정리하는 카테고리 입니다").build());
+        System.out.println("=======================================");
+        Date date1 = category.getCreateAt();
+        Date date2 = categoryRepository.findByName("프론트 엔드").getCreateAt();
+        System.out.println(date1);
+        System.out.println(date2);
+        // Assert.isTrue( date1.equals(date2));
         System.out.println("=======================================");
 
-        Category category = categoryRepository.findByCode("CT56453");
-        System.out.println(category);
+        
+        // Category category = categoryRepository.findByCode("CT56453");
+        // System.out.println(category);
         // category.setName("HTML");
         // category.setDescription("HTML에 대한 설명입니다");
-
         // contentService.updateCategory("CT56453", "HTML", "HTML에 대한 설명입니다");
-
         // category = categoryRepository.findByCode("CT56453");
-
     }
     @Test
     void test(){

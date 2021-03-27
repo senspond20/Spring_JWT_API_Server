@@ -78,10 +78,7 @@ public class NaverOAuthService {
             requestBody.add("client_secret", NAVER_CLIENT_SECRET);
             requestBody.add("grant_type", "authorization_code");
 
-        return new RestTemplate().postForEntity(
-                                NAVER_TOKEN_BASE_URL, 
-                                requestBody, 
-                                Map.class);
+        return new RestTemplate().postForEntity(NAVER_TOKEN_BASE_URL, requestBody, Map.class);
     }
 
 
