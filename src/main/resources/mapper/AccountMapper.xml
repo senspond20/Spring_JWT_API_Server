@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sens.pot.model.mapper.AccountMapper" >
+ 
+    <resultMap id="AccountResponse" type="com.sens.pot.service.account.dto.AccountResponseDto" >
+    	<result property="account_id" column="account_id" />
+    	<result property="email" column="email" />
+    	<result property="roles" column="roles" jdbcType="VARCHAR" javaType="java.lang.String" />
+	</resultMap>
+
+   <select id="findByEmail" resultMap="AccountResponse" parameterType="string">
+        SELECT account_id, email,password, GROUP_CONCAT(role_name) AS 'roles'
+        FROM account_roles ar 
+        JOIN account a USING(account_id)
+        JOIN `role` r USING(role_id)
+        WHERE email = #{email}
+    </select>
+
+     <select id="select_AccountAndRoles_All" resultMap="AccountResponseDto">
+        SELECT account_id, email, GROUP_CONCAT(role_name) AS 'roles'
+            FROM account_roles ar 
+            JOIN account a USING(account_id)
+            JOIN `role` r USING(role_id)
+        GROUP BY account_id
+    </select>
+
+    <select id="select_AccountAndRoles_ById" resultMap="AccountResponseDto" parameterType="int">
+        SELECT account_id, email, GROUP_CONCAT(role_name) AS 'roles'
+            FROM account_roles ar 
+            JOIN account a USING(account_id)
+            JOIN `role` r USING(role_id)
+        WHERE account_id = #{account_id}
+        GROUP BY account_id
+    </select>
+
+</mapper>
+
+

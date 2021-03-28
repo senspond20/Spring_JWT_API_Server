@@ -49,14 +49,14 @@
     <logger name="jdbc.resultsettable" level="INFO"/>
 
 
-    <logger name="com.sens.pot" level="DEBUG" additivity ="false">
+    <logger name="com.sens.pot" level="INFO" additivity ="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DAILY_ROLLING_FILE" />
     </logger>
 
     <logger name="org.springframework.web" level="DEBUG" additivity="false">
         <appender-ref ref="DAILY_ROLLING_FILE" />
-         <appender-ref ref="CONSOLE"/>
+         <!-- <appender-ref ref="CONSOLE"/> -->
     </logger>
     
     <!-- TRACE < DEBUG < INFO < WARN < ERROR -->

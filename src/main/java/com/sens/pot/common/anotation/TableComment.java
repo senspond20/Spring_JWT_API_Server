@@ -10,8 +10,6 @@ import java.lang.annotation.*;
 public @interface TableComment {
 
     /**
-     * 字段注释
-     *
      * @return String
      */
     String value() default "";

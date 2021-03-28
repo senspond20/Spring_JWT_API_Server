@@ -15,7 +15,7 @@
     </settings>
 	<typeAliases>
         <typeAlias type="java.util.HashMap" alias="hashmap" />
-		<typeAlias type="com.sens.pot.web.service.dto.AccountResponseDto" alias="AccountResponseDto" />
-        <typeAlias type="com.sens.pot.web.domain.content.Posts" alias ="Posts" />
+		<!-- <typeAlias type="com.sens.pot.web.service.auth.dto.AccountResponseDto" alias="AccountResponseDto" />
+        <typeAlias type="com.sens.pot.web.domain.content.Posts" alias ="Posts" /> -->
     </typeAliases>
 </configuration>

@@ -27,7 +27,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 // .apis(RequestHandlerSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("com.sens.pot.web.api"))
+                .apis(RequestHandlerSelectors.basePackage("com.sens.pot.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(metaData())

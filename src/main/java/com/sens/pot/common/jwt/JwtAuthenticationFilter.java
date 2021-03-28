@@ -17,8 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// import com.sens.pot.web.service.CustomUserDetailService;
-import com.sens.pot.web.service.auth.impl.CustomUserDetailService;
+import com.sens.pot.service.account.CustomUserDetailService;
 
 import java.io.IOException;
 import java.util.Collection;
