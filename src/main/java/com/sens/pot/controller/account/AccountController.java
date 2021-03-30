@@ -12,8 +12,6 @@ import com.sens.pot.service.account.dto.AccountResponseDto;
 import com.sens.pot.service.account.dto.AccountSaveRequestDto;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,7 +49,7 @@ public class AccountController {
     public ResponseEntity<?> getAccount(@RequestParam String email){
         return ResponseEntity.ok(accountService.findAccountByEmail(email));
     }
-    
+
     // 아래것들 안된다 지금
 
     // @PostAuthorize("hasRole('USER')") 

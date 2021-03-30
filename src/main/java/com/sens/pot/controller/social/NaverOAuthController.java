@@ -36,9 +36,7 @@ public class NaverOAuthController {
                                          @RequestParam(value = "state") String state){
         
 		  ResponseEntity<?> responseEntity = oAuthService.requestAccessToken(authCode, state);
-
       Object responseMessage = responseEntity.getBody();
-
       if(responseEntity.getStatusCode() == HttpStatus.OK){
           return responseMessage;
       }else{
@@ -48,7 +46,11 @@ public class NaverOAuthController {
     }
 
     @GetMapping("/auth/naver/userinfo")
+    @ResponseBody
     public Object requestUserInfo(@RequestParam(value = "accessToken") String accessToken){
+        System.out.println("===========================================");
+        System.out.println(accessToken);
+        System.out.println("===========================================");
         return oAuthService.requestUserInfo(accessToken);
     }
 

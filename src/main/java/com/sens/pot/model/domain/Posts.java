@@ -1,6 +1,5 @@
 package com.sens.pot.model.domain;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,12 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.util.Assert;
 
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,64 +25,65 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Table(name="posts")
 @Getter
-@EqualsAndHashCode(of= "id")
-@ToString(exclude = "reply")
-@NoArgsConstructor
-@AllArgsConstructor
-public class Posts {
+// @ToString(exclude = {"reply","content"})
+@ToString(exclude = {"reply"})
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Posts extends CuTimeEntity {
+    
     /**
      * 식별자 ID (PK)
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id", columnDefinition = "INT(11)")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "post_id", columnDefinition = "INT(11) unsigned")
     private Long id;
 
     /**
      * 제목
      */
     @Column(name="title",length = 155)
-    private String title;  // 제목
-
-    /**
-     * 내용 (메모리를 많이 차지하는 컬럼 - 추후 따로 테이블 뺀다. 1:1 관계로 )
-     */
-    @Column(name="content", columnDefinition = "TEXT NOT NULL")
-    private String content; // 컨텐츠
-
-    /**
-     * 생성날짜
-     */
-    @Column(name="create_at") 
-    @CreationTimestamp
-    private Date createAt; // 생성 날짜
-
-    /**
-     * 
-     */
-    @Column(name="update_at") 
-    @UpdateTimestamp
-    private Date updateAt; // 최종 변경날짜
+    private String title;  
     
+    /**
+     * 좋아요
+     */
+    @Column(name="liked", columnDefinition = "INT(11)")
+    private int liked = 0;  
+
+    /**
+     * 1 : 공개 / 0 : 비공개
+     */
+    @Column(name="is_activce", columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1") 
+    private boolean isActive;
+
+    /**
+     * 내용 OneToOne
+     */
+    /*@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "posts")
+    @JoinColumn(name="content_id")
+    private Content content;*/
+
+    private String content;
+    /**
+     * 카테고리 ManyToOne
+     */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "code")
-    private Category category; // 카테고리
+    private Category category; 
 
+    /**
+     * 코멘트 OneToMnay
+     */
     @OneToMany(fetch = FetchType.LAZY, 
                cascade = {
                     CascadeType.PERSIST, 
                     CascadeType.REMOVE
               }, mappedBy = "posts")
-    // @JoinColumn(name = "post_id")
     private List<Reply> reply = new ArrayList<>();
 
-    @Column(name="liked", columnDefinition = "INT(11)")
-    private int liked = 0; // 좋아요 
-
-    @Column(name="is_activce", columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1") // 1 : 공개 / 0 : 비공개
-    private boolean isActive;
 
     // @OneToMany(fetch = FetchType.LAZY, 
     //         cascade = {
@@ -96,10 +96,11 @@ public class Posts {
     @Builder
     public Posts(String title, String content, Category category){
         Assert.hasText(title,   "@@@@@@@ : title   must not be empty");
-        Assert.hasText(content, "@@@@@@@ : content must not be empty");
+       // Assert.hasText(content, "@@@@@@@ : content must not be empty");
        
         this.title = title;
         this.content = content;
+        //this.content = new Content(this, content);
         this.category = category;
         this.liked = 0;
     }
@@ -113,6 +114,7 @@ public class Posts {
         this.title = title;
     }
     public void updateContent(String content){
+        // this.content = new Content(this, content);
         this.content = content;
     }
     public void updateCategory(Category category){

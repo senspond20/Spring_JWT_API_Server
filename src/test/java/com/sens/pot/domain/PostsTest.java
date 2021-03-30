@@ -49,8 +49,17 @@ public class PostsTest {
     }
 
     @Test
+    @Transactional
+    @Rollback(false)
     void save(){
-      
+        Category category = categoryRepository.findByCode("CT28402");
+        Posts post = Posts.builder().title("안녕").category(category).build();
+        System.out.println(post);
+         post = postsRepository.save(post);
+         post.updateContent("하세요");
+         System.out.println(post);
+         System.out.println(post.getContent());
+        
     }
 
     @Test
@@ -93,13 +102,13 @@ public class PostsTest {
     void reply_insertTest(){
 
         // category save
-        Category category = categoryRepository.save(Category.builder().name("프론트 엔드").description("프론트엔드 정리").build());
+        Category category = categoryRepository.save(Category.builder().name("프론트 엔드2").description("프론트엔드 정리").build());
         System.out.println(category);
        
         // Post
         Posts post = Posts.builder()
                           .title("안녕하세요 프론트")
-                          .content("반갑습니다!!@#@")
+                          //.content("반갑습니다!!@#@")
                           .category(category)
                           .build();
                       
