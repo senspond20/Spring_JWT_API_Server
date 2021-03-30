@@ -138,6 +138,7 @@ public class OpenDataTest {
 		    //System.out.println(jsonStr);
 
             List<Map<String,String>> list = jsonArraytoListmapTest(jsonStr);
+            list.stream().forEach(System.out::println);
             // list.forEach(item->{
             //     System.out.println(item);
             // });
