@@ -44,7 +44,7 @@ public class OpenDataTest {
         params.add("numOfRows", Integer.toString(10));
         params.add("pageNo", Integer.toString(1));
         params.add("type", "JSON");
-        params.add("SG_APIM", "2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY");
+        // params.add("SG_APIM", "2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY");
         UriBuilder uri  = factory.builder()
                                  .path("/getFoodCateogryList")
                                  .queryParams(params);
