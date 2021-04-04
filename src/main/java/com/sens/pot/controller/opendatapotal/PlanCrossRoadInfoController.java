@@ -20,13 +20,13 @@ public class PlanCrossRoadInfoController {
     public Object getTest(@RequestParam Integer numOfRows, 
                           @RequestParam Integer pageNo, 
                           @RequestParam String srchCTId){
+
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         params.add("numOfRows", Integer.toString(numOfRows));      // 한페이지 결과수
         params.add("pageNo", Integer.toString(pageNo));          // 페이지 번호
         params.add("srchCTId", srchCTId);          //지역코드명
         return planCorssRoadInfoService.getPlanCRHDInfo(params);
     }
-
 
 
 }

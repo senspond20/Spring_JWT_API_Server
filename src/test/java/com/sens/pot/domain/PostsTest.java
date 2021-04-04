@@ -70,16 +70,16 @@ public class PostsTest {
         System.out.println(posts);
     }
 
-    @Test
-    void test(){
-        Category category = categoryRepository.findByCode("CT56453");
-        Posts post = new Posts();
-        post.updateCategory(category);
-
-        post = postsRepository.save(post);
-        System.out.println(post);
-
-    }
+//    @Test
+//    void test(){
+//        Category category = categoryRepository.findByCode("CT56453");
+//        Posts post = new Posts();
+//        post.updateCategory(category);
+//
+//        post = postsRepository.save(post);
+//        System.out.println(post);
+//
+//    }
 
     @Test
     @Transactional 
@@ -200,7 +200,7 @@ public class PostsTest {
     // @Transactional
     void delete_Post_Test(){
         // Posts post = postsRepository.findById(30L);
-        postsRepository.deleteById(1L);
+//        postsRepository.deleteById(1L);
     }
 
     /**

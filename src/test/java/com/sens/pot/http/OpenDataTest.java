@@ -88,19 +88,19 @@ public class OpenDataTest {
     String insertIntoTable(String tableName, List<Map<String,String>> list, int startNum){
         Set<String> keySet = list.get(startNum).keySet();
         StringBuilder sb = new StringBuilder();
-        sb.append("INSERT\sINTO\s").append(tableName).append("\s")
-                                 .append(keySet.toString().replaceAll("\\[", "(\s").replaceAll("\\]", "\s)"))
-                                 .append("\sVALUES\n");
+        sb.append("INSERT INTO ").append(tableName).append(" ")
+                                 .append(keySet.toString().replaceAll("\\[", "( ").replaceAll("\\]", "\\s)"))
+                                 .append(" VALUES\n");
         for(int i = startNum; i < list.size(); i ++){
-            sb.append("(\s");
+            sb.append("( ");
             Iterator<String> it =  keySet.iterator();
             int count = 0;
             while(it.hasNext()){
                 sb.append(list.get(i).get(it.next()));
                 if(count != keySet.size()-1){
-                    sb.append(",\s");
+                    sb.append(", ");
                 }else{
-                    sb.append("\s");
+                    sb.append(" ");
                 }
                 count++;
             }
@@ -139,12 +139,10 @@ public class OpenDataTest {
 
             List<Map<String,String>> list = jsonArraytoListmapTest(jsonStr);
             list.stream().forEach(System.out::println);
-            // list.forEach(item->{
-            //     System.out.println(item);
-            // });
+
+            
             String query = insertIntoTable("new_table", list, 1);
             System.out.println(query);
-            
 
 		    // Map<String,Object> map = new ObjectMapper().readValue(jsonStr, new TypeReference<Map<String, Object>>() {});
 		    // System.out.println(map);
