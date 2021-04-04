@@ -59,8 +59,6 @@ public class BoardService {
     }
 
 
-
-
     /**
      * 게시글 모두 조회
      * @return
@@ -69,8 +67,6 @@ public class BoardService {
     public List<Posts> findPostAll(){
         return postsRepository.findAll();
     }
-
-
 
 
 }

@@ -103,6 +103,7 @@ public class Posts extends CuTimeEntity {
         //this.content = new Content(this, content);
         this.category = category;
         this.liked = 0;
+        this.isActive = true;
     }
     // 코멘트 추가
     public void addReply(String reply){
@@ -112,6 +113,9 @@ public class Posts extends CuTimeEntity {
     // Update
     public void updateTitle(String title){
         this.title = title;
+    }
+    public void updateIsActive(Boolean isActive){
+        this.isActive = isActive;
     }
     public void updateContent(String content){
         // this.content = new Content(this, content);

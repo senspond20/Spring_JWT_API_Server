@@ -41,7 +41,6 @@ public class AccountService {
         Account account = accountSaveRequestDto.toEntity(passwordEncoder.encode(accountSaveRequestDto.getPassword()));
         
         Set<Role> roles = new HashSet<>();
-        
         if(account.getEmail().equals(ADMIN_EMAIL)){
             roles.add(roleRepository.findByRoleName(RoleType.MASTER));
         }
