@@ -19,8 +19,6 @@ public class InitRunner implements CommandLineRunner {
     private final DataSource dataSource;
     private Logger logger = LoggerFactory.getLogger(InitRunner.class);
 
- 
-    
     @Override
     public void run(String... args) throws Exception {
 

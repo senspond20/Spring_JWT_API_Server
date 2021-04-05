@@ -25,7 +25,7 @@ public class BoardService {
     private final ReplyRepository replyRepository;
 
     /**
-     * 게시글 저장
+     * 게시글 저장 (추후 사용자 ID추가)
      * @param category
      * @param title
      * @param content
@@ -56,6 +56,24 @@ public class BoardService {
         result.put("post", post);
         result.put("reply", reply);
         return result;
+    }
+
+    /**
+     * 게시글 코멘트 추가 (추후 사용자 ID추가)
+     * @param postId
+     * @param comment
+     */
+    @Transactional
+    public Posts addCommentToPost(Long postId,String comment){
+        Optional<Posts> post = postsRepository.findById(postId);
+        // post가 존재하면
+        if(post.isPresent()){
+            Posts p = post.get();
+            p.addReply(comment);
+            return p;
+        }else{
+            return null;
+        }
     }
 
 

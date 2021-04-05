@@ -12,4 +12,9 @@ public class AccountResponseDto {
     private String email;
     private String password;
     private String roles;
+
+    public AccountResponseDto setProtectivePassword(Boolean isProtective){
+        this.password = (isProtective == true) ? "[Protected]" : password;
+        return this;
+    }
 }

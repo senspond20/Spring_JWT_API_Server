@@ -34,7 +34,8 @@ public class Role {
     private String description;
     
     @Builder
-    public Role(String roleName, String description){
+    public Role(String code, String roleName, String description){
+        this.code = code;
         this.roleName = roleName;
         this.description =description;
     }

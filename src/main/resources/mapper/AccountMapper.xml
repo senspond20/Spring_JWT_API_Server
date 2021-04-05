@@ -1,35 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sens.pot.model.mapper.AccountMapper" >
- 
+
+
     <resultMap id="AccountResponse" type="com.sens.pot.service.account.dto.AccountResponseDto" >
     	<result property="account_id" column="account_id" />
     	<result property="email" column="email" />
+        <result property="password" column="password"/>
     	<result property="roles" column="roles" jdbcType="VARCHAR" javaType="java.lang.String" />
 	</resultMap>
 
-   <select id="findByEmail" resultMap="AccountResponse" parameterType="string">
-        SELECT account_id, email,password, GROUP_CONCAT(role_name) AS 'roles'
+    <resultMap id="AccountResponseDetail" type="com.sens.pot.service.account.dto.AccountResponseDetailDto" >
+        <result property="account_id" column="account_id" />
+        <result property="email" column="email" />
+        <result property="password" column="password"/>
+        <result property="roles" column="roles" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result property="socialType" column="social_type" />
+        <result property="nickname" column="nickname" />
+        <result property="isActive" column="is_active" jdbcType="TINYINT" javaType="java.lang.Boolean" />
+        <result property="createAt" column="create_at"  />
+    </resultMap>
+
+   <select id="findByEmailForUserDetail" resultMap="AccountResponse" parameterType="string">
+        SELECT account_id, email, password, GROUP_CONCAT(role_name) AS 'roles'
         FROM account_roles ar 
-        JOIN account a USING(account_id)
-        JOIN `role` r USING(role_id)
+            JOIN account a USING(account_id)
+            JOIN `role` r USING(role_code)
         WHERE email = #{email}
     </select>
 
-     <select id="select_AccountAndRoles_All" resultMap="AccountResponseDto">
+     <select id="select_AccountAll" resultMap="AccountResponse">
         SELECT account_id, email, GROUP_CONCAT(role_name) AS 'roles'
-            FROM account_roles ar 
+        FROM account_roles ar
             JOIN account a USING(account_id)
-            JOIN `role` r USING(role_id)
+            JOIN `role` r USING(role_code)
         GROUP BY account_id
     </select>
 
-    <select id="select_AccountAndRoles_ById" resultMap="AccountResponseDto" parameterType="int">
+    <select id="select_AccountById" resultMap="AccountResponse" parameterType="long">
         SELECT account_id, email, GROUP_CONCAT(role_name) AS 'roles'
-            FROM account_roles ar 
+        FROM account_roles ar
             JOIN account a USING(account_id)
-            JOIN `role` r USING(role_id)
+            JOIN `role` r USING(role_code)
         WHERE account_id = #{account_id}
+        GROUP BY account_id
+    </select>
+
+    <select id="select_AccountByEmail" resultMap="AccountResponse" parameterType="string">
+        SELECT account_id, email, GROUP_CONCAT(role_name) AS 'roles'
+        FROM account_roles ar
+             JOIN account a USING(account_id)
+             JOIN `role` r USING(role_code)
+        WHERE email = #{email}
         GROUP BY account_id
     </select>
 

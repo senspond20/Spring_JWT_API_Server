@@ -34,6 +34,12 @@ public class BoardController {
         return boardService.savePost(category,title,content);
     }
 
+    @GetMapping("/comment")
+    public Posts addCommentToPost(Long postId, String comment){
+        return boardService.addCommentToPost(postId,comment);
+    };
+
+
     /**
      * 게시글 상세 조회
      * @param id

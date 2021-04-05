@@ -8,8 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface AccountMapper {
-    public AccountResponseDto findByEmail(String email);
-    
-    public AccountResponseDto select_AccountAndRoles_ById(Long id);
-    public List<AccountResponseDto> select_AccountAndRoles_All();
+
+    public AccountResponseDto findByEmailForUserDetail(String email);
+    /* ----------------------------------------------------------------*/
+
+    public AccountResponseDto select_AccountById(Long id);
+
+    public AccountResponseDto select_AccountByEmail(String email);
+
+    public List<AccountResponseDto> select_AccountAll();
 }

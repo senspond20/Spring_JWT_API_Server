@@ -16,20 +16,25 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
 
+/**
+ * 로그인 인증처리를 한다.
+ */
 @RestController
 @RequiredArgsConstructor
 public class AuthenticateController {
     private final JwtTokenProvider jwtUtils;
     private final AuthenticationManager authenticationManager;
-    
-    // private Logger logger = LoggerFactory.getLogger(AuthenticateController.class);
 
+    /**
+     * 로그인 인증
+     * @param authRequest
+     * @return
+     * @throws Exception
+     */
     @PostMapping("/authenticate")
     public ResponseEntity<?> generateToken(@RequestBody AuthRequestDto authRequest) throws Exception {
         try {
@@ -60,10 +65,5 @@ public class AuthenticateController {
         }catch (Exception ex) {
             return new ResponseErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()).build();
         }
-
-
     }
-
-
-    
 }

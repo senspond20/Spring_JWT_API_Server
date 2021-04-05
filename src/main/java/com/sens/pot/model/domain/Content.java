@@ -38,7 +38,6 @@ public class Content {
     // @PrimaryKeyJoinColumn
     // private Posts posts;
 
-
     public Content(Posts posts, String content){
         this.posts = posts;
         this.id = posts.getId();

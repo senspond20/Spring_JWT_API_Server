@@ -83,7 +83,7 @@ public class Account {
      * "'가입유형(일반/구글/네이버/카카오 ....)'"
      */
     @Column(name ="social_type", columnDefinition = "VARCHAR(7) NOT NULL")
-    private SocialType socialType; 
+    private String socialType;
     
     /**
      *  계정 활성(1)/ 비활성(0) 상태 
@@ -107,9 +107,9 @@ public class Account {
         this.nickname = (username != null) ? username
                                            : UUID.randomUUID().toString().substring(0, 12);
         if(socialType == null){
-            this.socialType = SocialType.GOOGLE;
+            this.socialType = SocialType.NORMAL.name();
         }else{
-            this.socialType = socialType;
+            this.socialType = socialType.name();
         }
         this.isActive = true;
         this.password = password;
@@ -117,7 +117,7 @@ public class Account {
 
     }
 
-    public void updateRoles(Set<Role> roleSet) {
+    public void setRoles(Set<Role> roleSet) {
         this.roles = roleSet;
     }
     public void addRole(Role role){
