@@ -47,14 +47,17 @@ public class BoardService {
      * @return
      */
     public Object findPostDetailById(Long id){
-        Optional<Posts> post = postsRepository.findById(1L);
+        Optional<Posts> post = postsRepository.findById(id);
         List<Reply> reply = null;
-        if( post.isPresent()){
-            reply = post.get().getReply();
-        }
         Map<String,Object> result = new HashMap<>();
-        result.put("post", post);
-        result.put("reply", reply);
+        if( post.isPresent()){
+            Posts item = post.get();
+            result.put("post", item);
+            result.put("reply", item.getReply());
+        }else{
+            result.put("post", null);
+            result.put("reply", null);
+        }
         return result;
     }
 
