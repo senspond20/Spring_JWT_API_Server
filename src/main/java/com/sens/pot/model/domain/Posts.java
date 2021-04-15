@@ -70,7 +70,7 @@ public class Posts extends CuTimeEntity {
     /**
      * 카테고리 ManyToOne
      */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "code")
     private Category category; 
 

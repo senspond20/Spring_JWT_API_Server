@@ -1,12 +1,19 @@
 package com.sens.pot.service.board;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sens.pot.common.utils.ObjectMapperUtils;
 import com.sens.pot.model.domain.Category;
 import com.sens.pot.model.domain.Posts;
 import com.sens.pot.model.domain.Reply;
 import com.sens.pot.model.repository.CategoryRepository;
 import com.sens.pot.model.repository.PostsRepository;
 import com.sens.pot.model.repository.ReplyRepository;
+import com.sens.pot.service.board.dto.BoardListResponseDto;
+
 import lombok.RequiredArgsConstructor;
+import springfox.documentation.swagger2.mappers.ModelMapper;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -84,9 +92,10 @@ public class BoardService {
      * 게시글 모두 조회
      * @return
      */
-    @Transactional
-    public List<Posts> findPostAll(){
-        return postsRepository.findAll();
+    // @Transactional
+    public List<BoardListResponseDto> findPostAll(){
+        List<BoardListResponseDto> list = ObjectMapperUtils.mapAll(postsRepository.findAll(), BoardListResponseDto.class);
+        return list;
     }
 
 

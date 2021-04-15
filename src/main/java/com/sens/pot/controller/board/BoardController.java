@@ -4,6 +4,8 @@ import com.sens.pot.model.domain.Category;
 import com.sens.pot.model.domain.Posts;
 import com.sens.pot.model.domain.Reply;
 import com.sens.pot.service.board.BoardService;
+import com.sens.pot.service.board.dto.BoardListResponseDto;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,7 +57,7 @@ public class BoardController {
      * @return
      */
     @GetMapping("/all")
-    public List<Posts> findPostAll(){
+    public List<BoardListResponseDto> findPostAll(){
         return boardService.findPostAll();
     }
 
