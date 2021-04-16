@@ -9,6 +9,7 @@ import com.sens.pot.service.board.dto.BoardListResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,8 +64,11 @@ public class BoardController {
     public List<BoardListResponseDto> findPostAll(){
         return boardService.findPostAll();
     }
+    private static final int DEFAULT_SIZE = 10;
+
     @GetMapping("/page")
-    public CursorResult<Posts> get(Long cursorId, Pageable page) {
-        return boardService.get(cursorId, page);
+    public CursorResult<Posts> get(Long cursorId, Integer size) {
+        if (size == null) size = DEFAULT_SIZE;
+        return boardService.get(cursorId, PageRequest.of(0, size));
     }
 }
