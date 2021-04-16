@@ -92,9 +92,10 @@ public class BoardService {
      * 게시글 모두 조회
      * @return
      */
-    // @Transactional
+    @Transactional
     public List<BoardListResponseDto> findPostAll(){
         List<BoardListResponseDto> list = ObjectMapperUtils.mapAll(postsRepository.findAll(), BoardListResponseDto.class);
+        // return postsRepository.findAll();
         return list;
     }
 
