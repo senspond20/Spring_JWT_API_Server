@@ -1,5 +1,6 @@
 package com.sens.pot.controller.board;
 
+import com.sens.pot.common.model.CursorResult;
 import com.sens.pot.model.domain.Category;
 import com.sens.pot.model.domain.Posts;
 import com.sens.pot.model.domain.Reply;
@@ -7,6 +8,8 @@ import com.sens.pot.service.board.BoardService;
 import com.sens.pot.service.board.dto.BoardListResponseDto;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,5 +63,8 @@ public class BoardController {
     public List<BoardListResponseDto> findPostAll(){
         return boardService.findPostAll();
     }
-
+    @GetMapping("/page")
+    public CursorResult<Posts> get(Long cursorId, Pageable page) {
+        return boardService.get(cursorId, page);
+    }
 }

@@ -2,6 +2,7 @@ package com.sens.pot.service.board;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sens.pot.common.model.CursorResult;
 import com.sens.pot.common.utils.ObjectMapperUtils;
 import com.sens.pot.model.domain.Category;
 import com.sens.pot.model.domain.Posts;
@@ -14,6 +15,7 @@ import com.sens.pot.service.board.dto.BoardListResponseDto;
 import lombok.RequiredArgsConstructor;
 import springfox.documentation.swagger2.mappers.ModelMapper;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -97,6 +99,25 @@ public class BoardService {
         List<BoardListResponseDto> list = ObjectMapperUtils.mapAll(postsRepository.findAll(), BoardListResponseDto.class);
         // return postsRepository.findAll();
         return list;
+    }
+    
+    public CursorResult<Posts> get(Long cursorId, Pageable page) {
+        final List<Posts> boards = getBoards(cursorId, page);
+        final Long lastIdOfList = boards.isEmpty() ?
+                null : boards.get(boards.size() - 1).getId();
+
+        return new CursorResult<>(boards, hasNext(lastIdOfList));
+    }
+
+    private List<Posts> getBoards(Long id, Pageable page) {
+        return id == null ?
+                postsRepository.findAllByOrderByIdDesc(page) :
+                postsRepository.findByIdLessThanOrderByIdDesc(id, page);
+    }
+
+    private Boolean hasNext(Long id) {
+        if (id == null) return false;
+        return postsRepository.existsByIdLessThan(id);
     }
 
 
