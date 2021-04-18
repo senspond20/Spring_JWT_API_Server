@@ -22,7 +22,7 @@ public class BoardListResponseDto {
     private int liked;  
     private boolean isActive;
 
-    @JsonIgnore
+//    @JsonIgnore
     private Category category; 
     private String name; // category
     private LocalDateTime createAt;

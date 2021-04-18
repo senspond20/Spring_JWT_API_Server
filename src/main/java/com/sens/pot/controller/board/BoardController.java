@@ -4,6 +4,7 @@ import com.sens.pot.common.model.CursorResult;
 import com.sens.pot.model.domain.Category;
 import com.sens.pot.model.domain.Posts;
 import com.sens.pot.model.domain.Reply;
+import com.sens.pot.model.mapper.ContentMapper;
 import com.sens.pot.service.board.BoardService;
 import com.sens.pot.service.board.dto.BoardListResponseDto;
 
@@ -27,6 +28,7 @@ import java.util.Optional;
 @RequestMapping("/api/board")
 public class BoardController {
     private final BoardService boardService;
+    private final ContentMapper contentMapper;
 
     /**
      * 게시글 저장
@@ -44,6 +46,11 @@ public class BoardController {
     public Posts addCommentToPost(Long postId, String comment){
         return boardService.addCommentToPost(postId,comment);
     };
+
+    @GetMapping("/list")
+    public List<Map<String, Object>> getContent(){
+        return contentMapper.select_PostsList();
+    }
 
 
     /**

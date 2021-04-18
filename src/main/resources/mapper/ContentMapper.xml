@@ -5,9 +5,9 @@
 
    <select id="select_PostsList" resultType="hashmap">
         SELECT p.post_id,
-               p.create_at
+               p.create_at,
                c.name
-        FROM posts
+        FROM posts p
         JOIN category c USING(code)
     </select>
 

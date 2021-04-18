@@ -100,7 +100,13 @@ public class BoardService {
         // return postsRepository.findAll();
         return list;
     }
-    
+
+    /**
+     * 게시글 커서 페이징 조회
+     * @param cursorId
+     * @param page
+     * @return
+     */
     public CursorResult<Posts> get(Long cursorId, Pageable page) {
         final List<Posts> boards = getBoards(cursorId, page);
         final Long lastIdOfList = boards.isEmpty() ?
@@ -108,6 +114,7 @@ public class BoardService {
 
         return new CursorResult<>(boards, hasNext(lastIdOfList));
     }
+
 
     private List<Posts> getBoards(Long id, Pageable page) {
         return id == null ?
